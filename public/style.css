@@ -1,0 +1,62 @@
+:root {
+  --navy: #0b2545;
+  --blue: #134074;
+  --accent: #3a86ff;
+  --bg: #eef2f7;
+  --card: #ffffff;
+  --ink: #1b2430;
+  --muted: #5b6b7d;
+  --ok: #157f3b;
+  --err: #b00020;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--navy); color: #fff; padding: 14px 22px;
+}
+.brand { font-size: 22px; font-weight: 700; letter-spacing: .3px; }
+.brand small { font-weight: 400; opacity: .7; font-size: 13px; margin-left: 6px; }
+.badge { padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.badge.vuln { background: #ffd6d6; color: var(--err); }
+.badge.safe { background: #d6ffe0; color: var(--ok); }
+nav {
+  display: flex; gap: 18px; align-items: center;
+  background: var(--blue); padding: 10px 22px; color: #dce7f5;
+}
+nav a { color: #dce7f5; text-decoration: none; font-size: 14px; }
+nav a:hover { color: #fff; text-decoration: underline; }
+nav .who { margin-left: auto; font-size: 13px; opacity: .85; }
+main { max-width: 820px; margin: 24px auto; padding: 0 16px; }
+.card {
+  background: var(--card); border-radius: 12px; padding: 22px;
+  box-shadow: 0 2px 10px rgba(11,37,69,.08); margin-bottom: 20px;
+}
+h1 { margin-top: 0; color: var(--navy); }
+label { display: block; margin: 10px 0; font-size: 14px; color: var(--muted); }
+input, textarea {
+  width: 100%; padding: 9px 11px; margin-top: 4px;
+  border: 1px solid #c7d2e0; border-radius: 8px; font-size: 15px;
+}
+textarea { min-height: 70px; resize: vertical; }
+button {
+  margin-top: 12px; background: var(--accent); color: #fff; border: 0;
+  padding: 10px 18px; border-radius: 8px; font-size: 15px; cursor: pointer;
+}
+button:hover { background: #2f6fe0; }
+.balance { font-size: 18px; }
+.messages { list-style: none; padding: 0; }
+.messages li { padding: 10px 12px; border-bottom: 1px solid #eef; }
+.messages time { display: block; font-size: 11px; color: var(--muted); }
+table.tx { width: 100%; border-collapse: collapse; margin-top: 14px; }
+table.tx th, table.tx td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e6edf5; font-size: 14px; }
+.echo { background: #f3f7ff; padding: 8px 12px; border-radius: 8px; }
+.error { color: var(--err); background: #fff2f2; padding: 10px 12px; border-radius: 8px; white-space: pre-wrap; }
+.ok { color: var(--ok); background: #f0fff5; padding: 10px 12px; border-radius: 8px; }
+.hint { color: var(--muted); font-size: 13px; }
+footer { text-align: center; color: var(--muted); font-size: 13px; padding: 24px; }
