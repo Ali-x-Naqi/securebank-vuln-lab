@@ -1,0 +1,39 @@
+# SecureBank - Part 2 web security project.
+#
+#   Vulnerable version:  docker compose up --build
+#   Safe version:        set MODE=safe, e.g.
+#                          (PowerShell)  $env:MODE="safe"; docker compose up --build
+#                          (bash)        MODE=safe docker compose up --build
+#
+# The DB schema + seed data load automatically from ./db on first start.
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: securebank
+      MYSQL_USER: bankuser
+      MYSQL_PASSWORD: bankpass
+    # schema.sql runs before seed-data.sql (alphabetical order).
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpass"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    environment:
+      MODE: ${MODE:-vulnerable}
+      DB_HOST: db
+      DB_USER: bankuser
+      DB_PASSWORD: bankpass
+      DB_NAME: securebank
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy

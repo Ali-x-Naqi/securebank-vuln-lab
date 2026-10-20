@@ -1,0 +1,15 @@
+{
+  "name": "securebank-vuln-lab",
+  "version": "1.0.0",
+  "description": "Online banking app demonstrating XSS, CSRF and SQL Injection in a deliberately vulnerable mode and a hardened safe mode (same codebase, MODE toggle).",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "1.4.7",
+    "express": "4.21.2",
+    "express-session": "1.18.1",
+    "mysql2": "3.11.5"
+  }
+}
